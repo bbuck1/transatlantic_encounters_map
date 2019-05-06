@@ -51,6 +51,16 @@ Venezuela<- artists_paris_split_geocoded_1 %>%
 
 leaflet() %>% 
   addProviderTiles("Esri.WorldImagery") %>% 
+  addMarkers(data = artists_paris_split_geocoded_1,
+             lng = ~lon,
+             lat = ~lat,
+             clusterOptions = markerClusterOptions(),
+             label = ~Name,
+             group = "All",
+             popup = ~str_c("<h2>", Name, "</h2>", 
+                            "<b> Address: </b>", address,"<br>",
+                            "<b> Nationality: </b>", nationality_1,"<br>",
+                            "<b> Dates in Paris: </b>", dates_in_paris, "<br>")) %>% 
   addMarkers(data = Argentina,
              lng = ~lon,
              lat = ~lat,
@@ -232,9 +242,8 @@ leaflet() %>%
                             "<b> Nationality: </b>", nationality_1,"<br>",
                             "<b> Dates in Paris: </b>", dates_in_paris, "<br>")) %>% 
   addLayersControl(
-    baseGroups = c("Argentina", "Bolivia", "Brazil", "Chile", "Colombia", "Costa Rica", "Cuba","Dominican Republic", "Ecuador",
-                      "El Salvador", "Guatemala", "Honduras", "Mexico", "Paraguay", "Peru","Uruguay","Venezuela"),
+    baseGroups = c("All", "Argentina", "Bolivia", "Brazil", "Chile", "Colombia", "Costa Rica", "Cuba","Dominican Republic", "Ecuador",
+                   "El Salvador", "Guatemala", "Honduras", "Mexico", "Paraguay", "Peru","Uruguay","Venezuela"),
     options = layersControlOptions(collapsed = TRUE))
-  
-  
-  
+
+
